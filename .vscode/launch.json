@@ -1,0 +1,19 @@
+{
+  // Use o IntelliSense para saber mais sobre os atributos possíveis.
+  // Focalizar para exibir as descrições dos atributos existentes.
+  // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "formulário de equipistas",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "web",
+        "--dart-define-from-file=.env",
+        "--web-hostname=192.168.15.156",
+        "--web-port=8080"
+      ]
+    }
+  ]
+}
