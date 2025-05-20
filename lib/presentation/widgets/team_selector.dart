@@ -37,6 +37,7 @@ class _TeamSelectorState extends State<TeamSelector> {
               return const Text('Preencha as aptidões abaixo.');
             }
             return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: totalEncounter,
               shrinkWrap: true,
               itemBuilder: (context, index) {

@@ -11,7 +11,7 @@
       "args": [
         "web",
         "--dart-define-from-file=.env",
-        "--web-hostname=192.168.15.156",
+        "--web-hostname=localhost",
         "--web-port=8080"
       ]
     }

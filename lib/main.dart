@@ -25,7 +25,7 @@ class EjcFormApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadApp(
-      title: 'EJC Form',
+      title: 'Formulário de aptidões EJC',
       theme: ShadThemeData(
         brightness: Brightness.light,
         colorScheme: const ShadRoseColorScheme.light(),
