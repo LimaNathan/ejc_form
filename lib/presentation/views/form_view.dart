@@ -35,7 +35,6 @@ class _FormViewState extends State<FormView> {
   @override
   Widget build(BuildContext context) {
     final validator = FormValidator();
-    final theme = ShadTheme.of(context);
 
     void setPhones(phones) => setState(() => form.phones = phones);
     void setSkills(skills) => setState(() => form.skills = skills);
