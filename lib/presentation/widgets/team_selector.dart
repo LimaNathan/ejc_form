@@ -77,7 +77,7 @@ class _TeamSelectorState extends State<TeamSelector> {
                         onChanged: (value) {
                           widget.form.teams.add(TeamParticipation(
                             encontro: encounter.toString(),
-                            team: value!.name,
+                            team: value!.uuid,
                             isCoordinator: isCoordinator,
                           ));
                         },

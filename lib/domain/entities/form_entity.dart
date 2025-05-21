@@ -22,12 +22,12 @@ class FormEntity {
 
 class TeamParticipation {
   final String encontro;
-  final String team;
+  final String? team;
   final bool isCoordinator;
 
   TeamParticipation({
     required this.encontro,
-    required this.team,
+    this.team,
     required this.isCoordinator,
   });
 }

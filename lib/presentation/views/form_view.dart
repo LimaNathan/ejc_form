@@ -64,23 +64,9 @@ class _FormViewState extends State<FormView> {
 
             ShadToaster.of(context).show(
               ShadToast.destructive(
+                duration: const Duration(seconds: 15),
                 title: const Text('Ops! Houve um erro!'),
                 description: Text(message),
-                action: ShadButton.destructive(
-                  decoration: ShadDecoration(
-                    border: ShadBorder.all(
-                      color: theme.colorScheme.destructiveForeground,
-                      width: 1,
-                    ),
-                  ),
-                  onPressed: () => ShadToaster.of(context).hide(),
-                  child: const Text('Tentar denovo'),
-                ),
-              ),
-            );
-            ShadToaster.of(context).show(
-              const ShadToast.destructive(
-                showCloseIconOnlyWhenHovered: true,
               ),
             );
           }
@@ -138,7 +124,19 @@ class _FormViewState extends State<FormView> {
                   ShadButton(
                     expands: true,
                     onPressed: () {
-                      viewModel.submitForm(form..photo = viewModel.photoUrl);
+                      if (viewModel.photoUrl == null ||
+                          (viewModel.photoUrl != null &&
+                              viewModel.photoUrl!.isEmpty)) {
+                        ShadToaster.of(context).show(
+                          const ShadToast.destructive(
+                            duration: Duration(seconds: 15),
+                            title: Text('Ops! Houve um erro!'),
+                            description: Text('A foto não pode ficar vazia!'),
+                          ),
+                        );
+                      } else {
+                        viewModel.submitForm(form..photo = viewModel.photoUrl);
+                      }
                     },
                     child: const Text('Enviar'),
                   ),

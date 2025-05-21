@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:form_ejc/data/models/form_model.dart';
 import 'package:form_ejc/data/models/teams_model.dart';
 import 'package:form_ejc/domain/repositories/i_form_repository.dart';
@@ -37,10 +39,14 @@ class FormRepository implements IFormRepository {
                   'user_id': result['id'],
                   'encontro': equipe.encontro,
                   'equipe': equipe.team,
+                  'is_coordinator': equipe.isCoordinator,
                 })
             .toList();
 
-        await _supabaseClient.from('user_teams').insert(teamData);
+        final resultUserTeam =
+            await _supabaseClient.from('user_teams').insert(teamData);
+
+        log(resultUserTeam.toString(), name: 'resultUserTeam');
       }
 
       return const Success(unit);
