@@ -47,15 +47,6 @@ class FormModel extends FormEntity {
         'ejc_fez': ejcNumber,
         'aptidoes': skills,
         'aniversario': aniversario.toIso8601String(),
-
-        // 'user_teams': teams
-        //     .map((x) => {
-        //           'encontro': x.encontro,
-        //           'equipe': x.team,
-        //           'is_coordinator': x.isCoordinator,
-        //         })
-        //     .toList(),
-
         'telefones': phones,
       };
 }
