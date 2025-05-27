@@ -112,7 +112,6 @@ class _TeamSelectorState extends State<TeamSelector> {
           return Container();
         },
         loading: () => const CircularProgressIndicator(),
-        // error: (error) => Text(error.toString()),
         error: (_) => Container(),
         success: Container.new,
       );

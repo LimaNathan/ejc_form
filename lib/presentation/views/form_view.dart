@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_ejc/domain/entities/form_entity.dart';
 import 'package:form_ejc/domain/states/form_state.dart';
 import 'package:form_ejc/domain/validators/form_validator.dart';
+import 'package:form_ejc/presentation/widgets/circle_selector.dart';
 import 'package:form_ejc/presentation/widgets/encounter_selector.dart';
 import 'package:form_ejc/presentation/widgets/team_selector.dart';
 import 'package:form_ejc/utils/formatters/date_formatter.dart';
@@ -111,6 +112,7 @@ class _FormViewState extends State<FormView> {
                     inputFormatters: [DateInputFormatter()],
                   ),
                   EncounterSelector(form: form),
+                  CircleSelector(form: form),
                   TeamSelector(form: form),
                   SkillsSelector(
                     selectedSkills: form.skills,
