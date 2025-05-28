@@ -29,5 +29,11 @@ class FormValidator extends LucidValidator<FormEntity> {
       'Selecione pelo menos uma aptidão',
       '',
     );
+
+    ruleFor((form) => form.circle, key: 'círculos').must(
+      (circle) => circle.isNotEmpty,
+      'Selecione o seu círculo de origem',
+      '',
+    );
   }
 }

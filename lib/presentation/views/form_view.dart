@@ -135,6 +135,16 @@ class _FormViewState extends State<FormView> {
                             description: Text('A foto não pode ficar vazia!'),
                           ),
                         );
+                      }
+                      if (form.circle.isEmpty) {
+                        ShadToaster.of(context).show(
+                          const ShadToast.destructive(
+                            duration: Duration(seconds: 15),
+                            title: Text('Ops! Houve um erro!'),
+                            description:
+                                Text('Você deve selecionar o seu círculo'),
+                          ),
+                        );
                       } else {
                         viewModel.submitForm(form..photo = viewModel.photoUrl);
                       }
