@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:form_ejc/data/models/teams_model.dart';
 import 'package:form_ejc/domain/entities/form_entity.dart';
@@ -75,11 +77,22 @@ class _TeamSelectorState extends State<TeamSelector> {
                         description: const Text('Você deve selecionar '
                             'alguma das opções acima.'),
                         onChanged: (value) {
-                          widget.form.teams.add(TeamParticipation(
+                          final team = TeamParticipation(
                             encontro: encounter.toString(),
                             team: value!.uuid,
                             isCoordinator: isCoordinator,
-                          ));
+                          );
+
+                          if (widget //
+                              .form
+                              .teams
+                              .any((e) => int.parse(e.encontro) == encounter)) {
+                            widget.form.teams.removeWhere(
+                                (e) => int.parse(e.encontro) == encounter);
+                          }
+
+                          widget.form.teams.add(team);
+                          log('breakpoint');
                         },
                         items: [
                           ShadRadio(
