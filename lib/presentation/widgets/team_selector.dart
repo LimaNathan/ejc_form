@@ -84,8 +84,7 @@ class _TeamSelectorState extends State<TeamSelector> {
                         items: [
                           ShadRadio(
                             value: TeamsModel(
-                              name: 'Não servi nesse encontro',
-                            ),
+                                name: 'Não servi nesse encontro', uuid: '0'),
                             label: const Text('Não servi nesse encontro'),
                           ),
                           ...value.map(

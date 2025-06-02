@@ -30,6 +30,10 @@ class FormViewModel extends material.ChangeNotifier {
     notifyListeners();
   }
 
+  resetState() {
+    _init();
+  }
+
   void submitForm(FormEntity form) async {
     await _setState(const FormState.loading())
         .flatMap((_) => _formRepository //

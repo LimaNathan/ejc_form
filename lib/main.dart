@@ -24,27 +24,29 @@ class EjcFormApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShadApp(
-      title: 'Formulário de aptidões EJC',
-      theme: ShadThemeData(
-        brightness: Brightness.light,
-        colorScheme: const ShadRoseColorScheme.light(),
-      ),
-      home: MultiProvider(
-        providers: [
-          Provider<IFormRepository>(
-            create: (_) => FormRepository(
-                supabaseClient: Supabase //
-                    .instance
-                    .client),
+    return MultiProvider(
+      providers: [
+        Provider<IFormRepository>(
+          create: (_) => FormRepository(
+              supabaseClient: Supabase //
+                  .instance
+                  .client),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FormViewModel(
+            formRepository: context.read<IFormRepository>(),
           ),
-          ChangeNotifierProvider(
-            create: (context) => FormViewModel(
-              formRepository: context.read<IFormRepository>(),
-            ),
-          ),
-        ],
-        child: const FormView(),
+        ),
+      ],
+      child: ShadApp(
+        title: 'Formulário de aptidões EJC',
+        theme: ShadThemeData(
+          brightness: Brightness.light,
+          colorScheme: const ShadRoseColorScheme.light(),
+        ),
+        routes: {
+          '/': (context) => const FormView(),
+        },
       ),
     );
   }

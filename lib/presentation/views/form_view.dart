@@ -36,6 +36,11 @@ class _FormViewState extends State<FormView> {
   @override
   Widget build(BuildContext context) {
     final validator = FormValidator();
+    const maxEncounters = int.fromEnvironment('MAX_ENCOUNTERS');
+    int ejcNumber =
+        form.ejcNumber.isEmpty ? 0 : (int.tryParse(form.ejcNumber) ?? 0);
+
+    final totalEncounter = maxEncounters - ejcNumber;
 
     void setPhones(phones) => setState(() => form.phones = phones);
     void setSkills(skills) => setState(() => form.skills = skills);
@@ -49,8 +54,10 @@ class _FormViewState extends State<FormView> {
     }
 
     return Scaffold(
-      backgroundColor:
-          ShadTheme.of(context).colorScheme.accentForeground.withAlpha(10),
+      backgroundColor: ShadTheme.of(context) //
+          .colorScheme
+          .accentForeground
+          .withAlpha(10),
       body: Consumer<FormViewModel>(
         builder: (context, viewModel, _) {
           if (viewModel.state is FormLoading) {
@@ -67,6 +74,22 @@ class _FormViewState extends State<FormView> {
                 duration: const Duration(seconds: 15),
                 title: const Text('Ops! Houve um erro!'),
                 description: Text(message),
+              ),
+            );
+
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Ops! Houve um erro!'),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, '/');
+                      viewModel.resetState();
+                    },
+                    child: const Text('Tentar novamente'),
+                  ),
+                ],
               ),
             );
           }
@@ -135,8 +158,29 @@ class _FormViewState extends State<FormView> {
                             description: Text('A foto não pode ficar vazia!'),
                           ),
                         );
-                      }
-                      if (form.circle.isEmpty) {
+                      } else if (totalEncounter > 0 && form.teams.isEmpty ||
+                          form.teams.length < totalEncounter) {
+                        ShadToaster.of(context).show(
+                          const ShadToast.destructive(
+                            duration: Duration(seconds: 15),
+                            title: Text('Ops! Houve um erro!'),
+                            description: Text(
+                              'Você deve selecionar as equipes que serviu!',
+                            ),
+                          ),
+                        );
+                      } else if (form //
+                          .teams
+                          .any((test) => test.team == null)) {
+                        ShadToaster.of(context).show(
+                          const ShadToast.destructive(
+                            duration: Duration(seconds: 15),
+                            title: Text('Ops! Houve um erro!'),
+                            description: Text(
+                                'Revise o formulário, nem todos os encontros que você serviu foram selecionados!'),
+                          ),
+                        );
+                      } else if (form.circle.isEmpty) {
                         ShadToaster.of(context).show(
                           const ShadToast.destructive(
                             duration: Duration(seconds: 15),
