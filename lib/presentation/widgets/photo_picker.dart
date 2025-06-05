@@ -169,35 +169,36 @@ class PhotoPicker extends StatelessWidget {
                 )
               : null,
         ),
-        if (MediaQuery.of(context).size.width <= 1200)
-          ShadButton.outline(
-            onPressed: pickFromGallery,
-            child: const Text('Selecione a sua foto.'),
-          ),
-        if (MediaQuery.of(context).size.width > 1200)
-          ShadSelect<String>(
-            placeholder: const Text('Escolha como vai inserir a foto'),
-            options: const [
-              ShadOption(
-                value: 'camera',
-                child: Text('Câmera'),
-              ),
-              ShadOption(
-                value: 'gallery',
-                child: Text('Galeria'),
-              ),
-            ],
-            selectedOptionBuilder: (BuildContext context, String value) {
-              return const Text('Escolha como vai inserir a foto');
-            },
-            onChanged: (value) {
-              if (value == 'camera') {
-                captureFromCamera();
-              } else if (value == 'gallery') {
-                pickFromGallery();
-              }
-            },
-          ),
+        // if (MediaQuery.of(context).size.width <= 1200)
+        //   ShadButton.outline(
+        //     onPressed: pickFromGallery,
+        //     child: const Text('Selecione a sua foto.'),
+        //   ),
+        // if (MediaQuery.of(context).size.width > 1200)
+
+        ShadSelect<String>(
+          placeholder: const Text('Escolha como vai inserir a foto'),
+          options: const [
+            ShadOption(
+              value: 'camera',
+              child: Text('Câmera'),
+            ),
+            ShadOption(
+              value: 'gallery',
+              child: Text('Galeria'),
+            ),
+          ],
+          selectedOptionBuilder: (BuildContext context, String value) {
+            return const Text('Escolha como vai inserir a foto');
+          },
+          onChanged: (value) {
+            if (value == 'camera') {
+              captureFromCamera();
+            } else if (value == 'gallery') {
+              pickFromGallery();
+            }
+          },
+        ),
       ],
     );
   }
