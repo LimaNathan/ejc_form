@@ -34,17 +34,27 @@ class FormRepository implements IFormRepository {
           .single();
 
       if (user.teams.isNotEmpty) {
-        final teamData = user.teams
+        final teamData = user //
+            .teams
             .map((equipe) => {
                   'user_id': result['id'],
                   'encontro': equipe.encontro,
                   'equipe': equipe.team,
                   'is_coordinator': equipe.isCoordinator,
                 })
-            .toList();
+            .toList()
+          ..removeWhere((test) => test['equipe'] == '0');
 
-        final resultUserTeam =
-            await _supabaseClient.from('user_teams').insert(teamData);
+        final resultUserTeam = await _supabaseClient //
+            .from('user_teams')
+            .insert(teamData)
+            .catchError(
+          (onError) {
+            log(onError.toString());
+
+            throw Exception(onError);
+          },
+        );
 
         log(resultUserTeam.toString(), name: 'resultUserTeam');
       }

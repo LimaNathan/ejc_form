@@ -22,6 +22,15 @@ class FormView extends StatefulWidget {
 }
 
 class _FormViewState extends State<FormView> {
+  late final FormViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    viewModel = context.read<FormViewModel>();
+  }
+
   final form = FormEntity(
       circle: '',
       ejcNumber: '',
@@ -58,8 +67,9 @@ class _FormViewState extends State<FormView> {
           .colorScheme
           .accentForeground
           .withAlpha(10),
-      body: Consumer<FormViewModel>(
-        builder: (context, viewModel, _) {
+      body: ListenableBuilder(
+        listenable: viewModel,
+        builder: (context, _) {
           if (viewModel.state is FormLoading) {
             return const Center(
               child: CircularProgressIndicator(),
